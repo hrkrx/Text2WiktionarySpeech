@@ -20,16 +20,17 @@ def main(args):
         print(link)
         links.append(link)
 
+    curStream = None
     streams = []
-
     for link in links:
-        if link is "" or link is None:
+        if link == "" or link == None:
             continue
-        streams.append(ffmpeg.input(link))
+        if curStream == None:
+            curStream = ffmpeg.input(link)
+        else:
+            streams.append(ffmpeg.input(link))
 
-    stream = ffmpeg.concat(*streams, v=0, a=1)
-    stream = ffmpeg.output(stream, args.output)
-    ffmpeg.run(stream)
+    curStream.concat(*streams, v=0, a=1).silenceremove(1, 0, "-20dB").output(args.output).run()
 
 def get_wiktionary_audio(word, lang):
     lowerCaseWord = word.lower()
