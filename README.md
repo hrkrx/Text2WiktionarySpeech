@@ -1,6 +1,12 @@
 # Text2WiktionarySpeech
 This python script converts text to speech by searching for audio examples for the words on wiktionary
 
+# Dependencies
+```
+pip install urllib beautifulsoup4 ffmpeg-generator
+```
+ffmpeg must be present in `PATH`
+
 # Usage
 ```
 python main.py [-h] [-i INPUT] [-o OUTPUT] [-l LANGUAGE]
